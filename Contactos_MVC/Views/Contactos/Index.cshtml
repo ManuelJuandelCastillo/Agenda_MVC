@@ -1,0 +1,69 @@
+﻿@model IEnumerable<Contactos_MVC.Models.Contacto>
+
+@{
+    ViewBag.Title = "Contactos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Mis Contactos</h2>
+
+<p>
+    @Html.ActionLink("Nuevo contacto", "Create", new { area = "" }, new { @class="btn btn-primary"})
+
+    @using (Html.BeginForm())
+    {
+        <p style="margin:40px 0">Grupo: @Html.DropDownList("grupo", "Todos")
+            <span style="margin-left:30px">Nombre: </span>@Html.TextBox("searchString")
+            <input type="submit" value="Filtrar" class="btn btn-primary" style="margin-left:30px"/></p>
+    }
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.name)
+        </th>
+        <!--
+        <th>
+            @Html.DisplayNameFor(model => model.tnumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.mail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.address)
+        </th>
+        -->
+        <th>
+            @Html.DisplayNameFor(model => model.group)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.name)
+    </td>
+    <!--
+    <td>
+        @Html.DisplayFor(modelItem => item.tnumber)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.mail)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.address)
+    </td>
+        -->
+    <td>
+        @Html.DisplayFor(modelItem => item.group)
+    </td>
+    <td>
+        @Html.ActionLink("Editar", "Edit", new { id = item.ID }) |
+        @Html.ActionLink("Detalles", "Details", new { id = item.ID }) |
+        @Html.ActionLink("Eliminar", "Delete", new { id = item.ID })
+    </td>
+</tr>
+}
+
+</table>
